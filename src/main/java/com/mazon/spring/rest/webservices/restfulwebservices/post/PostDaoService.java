@@ -37,4 +37,8 @@ public class PostDaoService {
 		}
 		return null;
 	}
+	
+	public void remove(Post post){
+		posts.remove(post);
+	}
 }
