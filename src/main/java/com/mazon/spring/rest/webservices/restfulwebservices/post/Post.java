@@ -2,12 +2,26 @@ package com.mazon.spring.rest.webservices.restfulwebservices.post;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mazon.spring.rest.webservices.restfulwebservices.user.User;
+
+@Entity
 public class Post {
 	
+	@Id
+	@GeneratedValue
 	private Integer id;
 	private String title;
-	private String content;
-	private Date postDate;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+	private User user;
 	
 	public Post() {}
 	
@@ -15,8 +29,6 @@ public class Post {
 		super();
 		this.id = id;
 		this.title = title;
-		this.content = content;
-		this.postDate = postDate;
 	}
 	
 	public Integer getId() {
@@ -31,22 +43,17 @@ public class Post {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContent() {
-		return content;
+	public User getUser() {
+		return user;
 	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public Date getPostDate() {
-		return postDate;
-	}
-	public void setPostDate(Date postDate) {
-		this.postDate = postDate;
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
-		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", postDate=" + postDate + "]";
+		return "Post [id=" + id + ", title=" + title + "]";
 	}
 	
 }
